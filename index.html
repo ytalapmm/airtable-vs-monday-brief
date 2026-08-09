@@ -1,0 +1,1477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airtable vs. monday — Competitive Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;1,6..12,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF9F4;
+    --card:#FFFFFF;
+    --ink:#2B2A2E;
+    --ink-soft:#5C5A63;
+    --line:#EAE4D8;
+    --coral:#FF6B54;
+    --coral-deep:#E44E38;
+    --teal:#1C9C8E;
+    --teal-deep:#127367;
+    --gold:#F5B942;
+    --lav:#8A7FD1;
+    --pink:#F0668E;
+    --sky:#3E9FD8;
+    --row-hover:#FFF8F0;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Nunito Sans', sans-serif;
+    font-size:17px;
+    line-height:1.66;
+  }
+  h1,h2,.display{
+    font-family:'Baloo 2', sans-serif;
+  }
+  .mono{
+    font-family:'JetBrains Mono', monospace;
+  }
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  a{color:inherit;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--card);
+    border-bottom:2px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:920px;
+    margin:0 auto;
+    padding:18px 24px 14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    position:relative;
+  }
+  .wordmark{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    color:var(--coral-deep);
+    font-size:1.25rem;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+  }
+  .brand-logo{
+    width:20px;
+    height:20px;
+    border-radius:6px;
+    vertical-align:middle;
+  }
+  .vs-txt{
+    font-weight:600;
+    color:var(--ink-soft);
+    font-size:1.05rem;
+  }
+  .btn-download{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.74rem;
+    color:#fff;
+    background:var(--teal);
+    border:none;
+    border-radius:999px;
+    padding:6px 14px;
+    cursor:pointer;
+    box-shadow:0 3px 0 var(--teal-deep);
+    transform:translateY(0);
+    transition:transform .08s ease, box-shadow .08s ease;
+  }
+  .btn-download:active{
+    transform:translateY(2px);
+    box-shadow:0 1px 0 var(--teal-deep);
+  }
+  .btn-group{
+    display:flex;
+    gap:8px;
+    position:absolute;
+    right:16px;
+    top:50%;
+    transform:translateY(-50%);
+  }
+  .btn-download.coral{
+    background:var(--coral);
+    box-shadow:0 3px 0 var(--coral-deep);
+  }
+  .btn-download.coral:active{
+    box-shadow:0 1px 0 var(--coral-deep);
+  }
+  .nav-toggle{
+    display:none;
+    align-items:center;
+    justify-content:center;
+    width:48px;
+    height:48px;
+    background:var(--card);
+    border:2px solid var(--line);
+    border-radius:12px;
+    font-size:1.4rem;
+    line-height:1;
+    color:var(--ink);
+    cursor:pointer;
+    padding:0;
+    flex:0 0 auto;
+  }
+  .nav-download{display:none;}
+  .section-nav{
+    max-width:920px;
+    margin:0 auto;
+    padding:4px 24px 4px 24px;
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .section-nav::-webkit-scrollbar{display:none;}
+  .section-nav a{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    text-decoration:none;
+    white-space:nowrap;
+    padding:4px 2px;
+    border-bottom:2px solid transparent;
+  }
+  .section-nav a:hover{
+    color:var(--coral-deep);
+    border-bottom-color:var(--coral);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding-top:64px;
+    padding-bottom:40px;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.78rem;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--coral-deep);
+    background:#FFE3DC;
+    border-radius:999px;
+    padding:6px 16px;
+    margin-bottom:18px;
+  }
+  h1{
+    font-size:clamp(2.1rem, 5.4vw, 3.35rem);
+    font-weight:800;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+    margin:0 0 18px 0;
+  }
+  h1 .hi{
+    color:var(--coral);
+  }
+  .standfirst{
+    font-size:1.14rem;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 0 22px 0;
+  }
+  .meta-row{
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:36px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  .stat-grid.two-col{
+    grid-template-columns:repeat(2, 1fr);
+  }
+  .stat-tile{
+    background:var(--card);
+    border:2px solid var(--line);
+    border-radius:20px;
+    padding:22px 16px;
+    text-align:center;
+  }
+  .stat-num{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:2rem;
+    color:var(--teal-deep);
+    display:block;
+  }
+  .stat-cap{
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    margin-top:4px;
+    display:block;
+  }
+
+  /* ---------- Sections ---------- */
+  section{
+    padding-top:56px;
+    padding-bottom:8px;
+    scroll-margin-top:96px;
+  }
+  .sec-head{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:22px;
+  }
+  .sec-icon{
+    font-size:1.7rem;
+    line-height:1;
+  }
+  h2{
+    font-size:1.55rem;
+    font-weight:700;
+    letter-spacing:-0.005em;
+    margin:0;
+  }
+  .sec-sub{
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    margin:-14px 0 22px 0;
+  }
+
+  /* ---------- Reason blocks ---------- */
+  .reasons{
+    list-style:none;
+    margin:0 0 8px 0;
+    padding:0;
+    counter-reset:reason;
+  }
+  .reason{
+    counter-increment:reason;
+    margin-bottom:22px;
+  }
+  .reason-title{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+  .reason-title::before{
+    content:counter(reason);
+    flex:0 0 auto;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--gold);
+    color:#5A3B0A;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .reason-title span{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1.05rem;
+  }
+  .reason-desc{
+    margin:0 0 10px 42px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    font-style:italic;
+  }
+
+  /* ---------- Quote cards ---------- */
+  .quote-card{
+    background:var(--card);
+    border:2px solid var(--line);
+    border-radius:20px;
+    padding:20px 24px;
+    margin-left:42px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .quote-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(43,42,46,0.08);
+  }
+  .quote-text{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:1.06rem;
+    line-height:1.5;
+    margin:0 0 14px 0;
+  }
+  .attribution{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+  }
+  .attribution b{
+    color:var(--ink);
+  }
+  .attr-label{color:var(--ink-soft);}
+  .chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px 10px;
+    color:var(--ink-soft);
+    display:inline-flex;
+    align-items:center;
+  }
+  .chip .chip-logo{
+    width:12px;
+    height:12px;
+    border-radius:3px;
+    margin-right:5px;
+  }
+  .quote-top{
+    display:flex;
+    justify-content:flex-end;
+    margin:-6px 0 2px 0;
+  }
+  .call-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    font-weight:600;
+    color:var(--ink-soft);
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px 10px;
+  }
+  .gong-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.76rem;
+    font-weight:600;
+    color:var(--teal-deep);
+    background:#EAF7F5;
+    border:1px solid #B9E3DC;
+    border-radius:999px;
+    padding:3px 10px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:4px;
+  }
+  .gong-btn:hover{background:#DFF1EE;}
+
+  @media (max-width:640px){
+    .quote-card{margin-left:0;}
+  }
+
+  /* ---------- Callouts ---------- */
+  .callout{
+    border-radius:18px;
+    border:2px solid;
+    padding:18px 22px;
+    margin-bottom:16px;
+  }
+  .callout-label{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.95rem;
+    display:block;
+    margin-bottom:8px;
+  }
+  .callout.amber{background:#FEF6E3; border-color:#F1DDA0; }
+  .callout.amber .callout-label{color:#8A5B00;}
+  .callout.teal{background:#EAF7F5; border-color:#B9E3DC;}
+  .callout.teal .callout-label{color:var(--teal-deep);}
+  .callout.coral{background:#FFEEE9; border-color:#F9C6B9;}
+  .callout.coral .callout-label{color:var(--coral-deep);}
+
+  .mini-row{margin-bottom:14px;}
+  .mini-row b{font-family:'Baloo 2', sans-serif; font-size:0.92rem;}
+  .mini-row p{margin:4px 0 0 0; font-size:0.94rem;}
+
+  .lead-sub{
+    margin:4px 0 0 0;
+    font-style:italic;
+    color:var(--ink-soft);
+    font-size:0.95rem;
+  }
+  .mini-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:10px;
+    margin:12px 0;
+  }
+  .mini-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:10px 14px;
+  }
+  .mini-card b{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:0.88rem;
+    display:block;
+    margin-bottom:3px;
+  }
+  .mini-card p{
+    margin:0;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+  }
+  .tag-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:6px;
+  }
+  .tag{
+    font-family:'Nunito Sans', sans-serif;
+    font-weight:600;
+    font-size:0.8rem;
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px 12px;
+    color:var(--ink-soft);
+  }
+  .tag.pro{background:#EAF7F5; border-color:#B9E3DC; color:var(--teal-deep);}
+  .tag.con{background:#FFEEE9; border-color:#F9C6B9; color:var(--coral-deep);}
+
+  /* ---------- Rating rings ---------- */
+  .rating-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding-bottom:10px;
+    border-bottom:2px solid var(--line);
+  }
+  .rating-head-label{flex:1 1 auto;}
+  .rating-head-name{
+    width:78px;
+    text-align:center;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.76rem;
+    text-transform:uppercase;
+    letter-spacing:0.03em;
+    color:var(--ink-soft);
+  }
+  .ratings-list{margin-bottom:24px;}
+  .rating-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .rating-row:last-child{border-bottom:none;}
+  .rating-label{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    flex:1 1 auto;
+    min-width:0;
+  }
+  .rating-cols{
+    display:flex;
+    gap:28px;
+    flex:0 0 auto;
+  }
+  .g2-ring-group{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    width:78px;
+  }
+  .g2-ring{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    background:conic-gradient(var(--ink-soft) calc(var(--pct)*1%), var(--line) 0);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .g2-ring.win{
+    background:conic-gradient(var(--teal) calc(var(--pct)*1%), var(--line) 0);
+  }
+  .g2-ring-inner{
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:var(--card);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    color:var(--ink);
+  }
+  .g2-ring.win .g2-ring-inner{color:var(--teal-deep);}
+  .g2-ring-count{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.68rem;
+    color:var(--ink-soft);
+  }
+  @media (max-width:640px){
+    .rating-cols{gap:14px;}
+    .g2-ring-group{width:58px;}
+    .g2-ring{width:46px; height:46px;}
+    .g2-ring-inner{width:36px; height:36px; font-size:0.76rem;}
+    .rating-head-name{width:58px;}
+  }
+
+  @media (max-width:640px){
+    .mini-grid{grid-template-columns:1fr;}
+  }
+
+  .kmsg-list, .prod-list{
+    list-style:none;
+    margin:10px 0 12px 0;
+    padding:0;
+  }
+  .kmsg-list li, .prod-list li{
+    padding:6px 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.94rem;
+  }
+  .kmsg-list li:last-child, .prod-list li:last-child{border-bottom:none;}
+  .kmsg-list b, .prod-list b{font-family:'Baloo 2', sans-serif; font-size:0.94rem;}
+
+  .social-proof{
+    font-size:0.85rem;
+    font-style:italic;
+    color:var(--ink-soft);
+    margin-top:8px;
+  }
+
+  /* ---------- Data table ---------- */
+  .pane-title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    margin:22px 0 12px 0;
+    color:var(--ink-soft);
+  }
+  .table-scroll{
+    overflow-x:auto;
+    margin-bottom:24px;
+    -webkit-overflow-scrolling:touch;
+  }
+  .scroll-hint{
+    display:none;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin:0 0 8px 0;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    background:#F1EFEA;
+    border:2px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+    min-width:560px;
+  }
+  thead th{
+    text-align:left;
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:0.85rem;
+    color:var(--ink-soft);
+    border-bottom:2px solid var(--line);
+    padding:12px 16px;
+  }
+  tbody td{
+    border-bottom:1px solid var(--line);
+    padding:14px 16px;
+    font-size:0.92rem;
+    vertical-align:top;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:hover{background:var(--row-hover);}
+  td.num, th.num{
+    font-family:'JetBrains Mono', monospace;
+    text-align:right;
+    white-space:nowrap;
+  }
+  .table-left td, .table-left th{
+    text-align:left;
+  }
+  .table-left td.num, .table-left th.num{
+    white-space:normal;
+  }
+
+  /* ---------- News cards ---------- */
+  .news-group-label{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:1rem;
+    margin:22px 0 12px 0;
+    color:var(--ink-soft);
+  }
+  .news-card{
+    background:var(--card);
+    border:2px solid var(--line);
+    border-radius:20px;
+    padding:16px 20px;
+    margin-bottom:12px;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .news-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px rgba(43,42,46,0.08);
+  }
+  .news-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.75rem;
+    background:var(--paper);
+    border:1px solid var(--line);
+    border-radius:999px;
+    padding:3px 10px;
+    color:var(--ink-soft);
+    display:inline-block;
+    margin-bottom:8px;
+  }
+  .news-headline{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:600;
+    font-size:1rem;
+    margin:0 0 4px 0;
+  }
+  .news-blurb{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .news-card.placeholder{
+    border-style:dashed;
+    color:var(--ink-soft);
+  }
+
+
+  /* ---------- Footer ---------- */
+  footer{
+    border-top:2px solid var(--line);
+    margin-top:56px;
+    padding:24px 0 40px 0;
+  }
+  .footer-row{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+
+  /* ---------- Motion / reveal ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(10px);
+    transition:opacity .5s cubic-bezier(0.16,1,0.3,1), transform .5s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1; transform:none; transition:none;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:640px){
+    .hero{padding-top:44px;}
+    .stat-grid{grid-template-columns:1fr;}
+    .wrap{padding:0 16px;}
+    .scroll-hint{display:block;}
+    .btn-download{padding:8px 16px; font-size:0.8rem;}
+    .gong-btn{padding:6px 12px;}
+
+    .topbar-inner{
+      padding:14px 16px 12px 16px;
+      justify-content:space-between;
+    }
+    .wordmark{
+      position:static;
+      left:auto;
+      transform:none;
+      font-size:0.95rem;
+      gap:5px;
+    }
+    .brand-logo{width:16px; height:16px;}
+    .vs-txt{font-size:0.82rem;}
+    .btn-group{display:none;}
+    .nav-toggle{display:flex;}
+    .section-nav{
+      display:none;
+      max-width:none;
+      flex-direction:column;
+      align-items:stretch;
+      gap:0;
+      padding:8px 16px 12px 16px;
+      overflow-x:visible;
+    }
+    .section-nav.open{display:flex;}
+    .section-nav a{
+      padding:12px 4px;
+      border-bottom:1px solid var(--line);
+    }
+    .section-nav a:last-child{border-bottom:none;}
+    .nav-download{
+      display:block;
+      width:100%;
+      margin:14px 0 4px 0;
+      text-align:center;
+    }
+  }
+
+  @media (max-width:480px){
+    .rating-row{flex-wrap:wrap; row-gap:10px;}
+    .rating-label{flex:1 1 100%;}
+    .rating-cols{flex:1 1 100%; justify-content:space-around;}
+    .rating-head{flex-wrap:wrap;}
+    .rating-head-label{flex:1 1 100%;}
+    .rating-head .rating-cols{justify-content:space-around;}
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    .topbar{display:none;}
+    .quote-card:hover, .news-card:hover{transform:none; box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="wordmark">
+      <img class="brand-logo" src="https://www.google.com/s2/favicons?domain=airtable.com&sz=64" alt="Airtable logo">
+      Airtable
+      <span class="vs-txt">vs.</span>
+      <img class="brand-logo" src="https://www.google.com/s2/favicons?domain=monday.com&sz=64" alt="monday logo">
+      monday
+    </span>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sectionNav">☰</button>
+  </div>
+  <div class="btn-group">
+    <button class="btn-download coral" id="btnMdDesktop">Download MD</button>
+  </div>
+  <nav class="section-nav" id="sectionNav">
+    <a href="#dual-users">Dual Users</a>
+    <a href="#lost-deals">Lost Deals</a>
+    <a href="#g2">G2 Comparison</a>
+    <a href="#promise">Airtable Promise</a>
+    <a href="#pricing">Airtable Pricing</a>
+    <a href="#whats-new">What's New</a>
+    <button class="btn-download coral nav-download" id="btnMdMobile">Download MD</button>
+  </nav>
+</div>
+
+<div class="wrap">
+
+  <section class="hero reveal">
+    <span class="eyebrow">Competitive Brief</span>
+    <h1>Airtable vs. <span class="hi">monday</span></h1>
+    <p class="standfirst">Why customers run both tools, why some pick Airtable over monday — plus a look at Airtable's messaging, product lineup, pricing, and latest moves.</p>
+    <div class="meta-row mono">
+      <span>Updated: 2026-08-06</span>
+      <span>Source: Gong + Snowflake BigBrain + the web</span>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-tile">
+        <span class="stat-num mono">794</span>
+        <span class="stat-cap">Gong calls reviewed (752 dual-use + 42 lost-deal)</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num mono">8</span>
+        <span class="stat-cap">Reasons captured (5 dual-use + 3 lost-deal)</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num mono">8</span>
+        <span class="stat-cap">Companies represented</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 1: DUAL USERS -->
+  <section id="dual-users" class="reveal">
+    <div class="sec-head">
+      <span class="sec-icon">👥</span>
+      <h2>Dual Users</h2>
+    </div>
+    <p class="sec-sub">monday customers who also run Airtable — top 5 reasons for dual usage, from 752 paying-customer calls mentioning Airtable (last 365 days).</p>
+    <ol class="reasons">
+      <li class="reason">
+        <div class="reason-title"><span>Already embedded in workflows</span></div>
+        <p class="reason-desc">Airtable owns critical processes (content ops, editorial calendars, data pipelines). Migration has high cost and no forcing function.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">137 calls</span></div>
+          <p class="quote-text">8 of 9 company locations use Airtable as their primary PM suite and core database — only one location is on monday.com</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=7510241496424467955" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+      <li class="reason">
+        <div class="reason-title"><span>Org governance & tool coexistence</span></div>
+        <p class="reason-desc">Different teams own different tools. Active internal debate about which tool covers which workflow — consolidation requires exec mandate.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">35 calls</span></div>
+          <p class="quote-text">Dimitri's team creating an ADR to establish governance for when to use Airtable vs monday — 10 stakeholders involved, due Q3</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=1489803225766804312" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+      <li class="reason">
+        <div class="reason-title"><span>Developer / scripting advantage</span></div>
+        <p class="reason-desc">Airtable's scripting env gives devs control monday's automations don't match. Technical workflows can't migrate without losing capability.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">11 calls</span></div>
+          <p class="quote-text">Airtable workflow relies on 1,000+ lines of custom scripting to normalize Jira data — a technical capability monday.com is believed to lack</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=3454602966426795617" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+      <li class="reason">
+        <div class="reason-title"><span>Relational DB depth</span></div>
+        <p class="reason-desc">Tech/data teams explicitly prefer Airtable's data model for structured, queryable data. monday feels less native for this workload.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">5 calls</span></div>
+          <p class="quote-text">Data expert prefers Airtable for database capabilities — focused on data usability and extractability that monday doesn't match</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=1488888498142729130" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+      <li class="reason">
+        <div class="reason-title"><span>Specific feature Airtable covers that monday prices as an add-on</span></div>
+        <p class="reason-desc">In some accounts Airtable includes a capability at no extra cost that monday charges for, making the switch hard to justify.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">4 calls</span></div>
+          <p class="quote-text">Airtable includes a feature equivalent to monday Vibe at no extra cost — monday charges $6-8K/yr for the same, making it hard to justify the switch</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=6636794219335452769" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- SECTION 2: LOST DEALS -->
+  <section id="lost-deals" class="reveal">
+    <div class="sec-head">
+      <span class="sec-icon">📉</span>
+      <h2>Lost Deals</h2>
+    </div>
+    <p class="sec-sub">Top 3 CRM-defined reasons prospects chose Airtable over monday, from 42 closed-lost deals (last 365 days).</p>
+    <ol class="reasons">
+      <li class="reason">
+        <div class="reason-title"><span>Business decision — existing contract</span></div>
+        <p class="reason-desc">Airtable already contracted org-wide. Procurement forces utilization of existing tool before new spend is approved.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">23 calls</span></div>
+          <p class="quote-text">Another team signed a 3-yr Airtable contract — procurement forcing its use. 'It can technically meet requirements, hard to justify the monday spend when Airtable is essentially free internally'</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=1432900706140113851" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+      <li class="reason">
+        <div class="reason-title"><span>Switching inertia — sticking with internal tool</span></div>
+        <p class="reason-desc">Prospect evaluated monday but migration cost and disruption wasn't worth it. Airtable good enough; no burning platform.</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">11 calls</span></div>
+          <p class="quote-text">Expanding Airtable use, pausing monday eval — 'will try Airtable first, revisit monday if it doesn't meet requirements'</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=5269344177758542574" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+      <li class="reason">
+        <div class="reason-title"><span>Product gap — specific capability Airtable covered, monday didn't</span></div>
+        <p class="reason-desc">Evaluation came down to feature fit. Airtable won on a specific capability (e.g. capacity planning depth, dependencies).</p>
+        <div class="quote-card">
+          <div class="quote-top"><span class="call-badge">8 calls</span></div>
+          <p class="quote-text">Monday and Airtable neck-and-neck at end of eval — capacity planning and dependency gaps in monday were the deciding factors</p>
+          <div class="attribution">
+            <a class="gong-btn" href="https://us-57974.app.gong.io/call?id=6129366922491476482" target="_blank" rel="noopener">Gong call ↗</a>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- SECTION 3: G2 COMPARISON -->
+  <section id="g2" class="reveal">
+    <div class="sec-head">
+      <span class="sec-icon">⭐</span>
+      <h2>G2 Comparison</h2>
+    </div>
+    <p class="sec-sub">Third-party validation from G2 — ratings, review volume, and reviewer-sourced pros/cons. Source: g2.com/compare/airtable-vs-monday-com.</p>
+
+    <div class="stat-grid two-col">
+      <div class="stat-tile">
+        <span class="stat-num mono">4.6 / 5</span>
+        <span class="stat-cap">Airtable — 3,284 reviews</span>
+      </div>
+      <div class="stat-tile">
+        <span class="stat-num mono">4.7 / 5</span>
+        <span class="stat-cap">monday — 17,056 reviews</span>
+      </div>
+    </div>
+
+    <div class="mini-row">
+      <b>Top Cons — Airtable</b>
+      <div class="tag-list">
+        <span class="tag con">👎 Learning Curve (261 reviews)</span>
+        <span class="tag con">👎 Missing Features (253 reviews)</span>
+      </div>
+    </div>
+    <div class="mini-row">
+      <b>Top Pros — monday</b>
+      <div class="tag-list">
+        <span class="tag pro">👍 Ease of Use (3,935 reviews)</span>
+        <span class="tag pro">👍 Team Collaboration (2,721 reviews)</span>
+      </div>
+    </div>
+
+    <div class="rating-head">
+      <span class="rating-head-label"></span>
+      <div class="rating-cols">
+        <span class="rating-head-name">Airtable</span>
+        <span class="rating-head-name">monday</span>
+      </div>
+    </div>
+    <div class="ratings-list">
+      <div class="rating-row">
+        <span class="rating-label">Meets Requirements</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:88"><div class="g2-ring-inner">8.8</div></div>
+            <span class="g2-ring-count">2,531</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:90"><div class="g2-ring-inner">9.0</div></div>
+            <span class="g2-ring-count">13,845</span>
+          </div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Ease of Use</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:87"><div class="g2-ring-inner">8.7</div></div>
+            <span class="g2-ring-count">2,564</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:91"><div class="g2-ring-inner">9.1</div></div>
+            <span class="g2-ring-count">14,128</span>
+          </div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Ease of Setup</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:84"><div class="g2-ring-inner">8.4</div></div>
+            <span class="g2-ring-count">1,552</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:88"><div class="g2-ring-inner">8.8</div></div>
+            <span class="g2-ring-count">8,089</span>
+          </div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Ease of Admin</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:87"><div class="g2-ring-inner">8.7</div></div>
+            <span class="g2-ring-count">1,209</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:90"><div class="g2-ring-inner">9.0</div></div>
+            <span class="g2-ring-count">6,160</span>
+          </div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Quality of Support</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:84"><div class="g2-ring-inner">8.4</div></div>
+            <span class="g2-ring-count">1,911</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:89"><div class="g2-ring-inner">8.9</div></div>
+            <span class="g2-ring-count">11,063</span>
+          </div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Good Partner in Business</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:89"><div class="g2-ring-inner">8.9</div></div>
+            <span class="g2-ring-count">1,091</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:91"><div class="g2-ring-inner">9.1</div></div>
+            <span class="g2-ring-count">5,955</span>
+          </div>
+        </div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Product Direction (% positive)</span>
+        <div class="rating-cols">
+          <div class="g2-ring-group">
+            <div class="g2-ring" style="--pct:90"><div class="g2-ring-inner">9.0</div></div>
+            <span class="g2-ring-count">2,407</span>
+          </div>
+          <div class="g2-ring-group">
+            <div class="g2-ring win" style="--pct:95"><div class="g2-ring-inner">9.5</div></div>
+            <span class="g2-ring-count">13,374</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4: AIRTABLE PROMISE -->
+  <section id="promise" class="reveal">
+    <div class="sec-head">
+      <span class="sec-icon">📣</span>
+      <h2>Airtable Promise</h2>
+    </div>
+    <p class="sec-sub">Messaging, audience, and product lineup — pulled from the web.</p>
+
+    <div class="callout amber">
+      <span class="callout-label">Messaging</span>
+      <div class="lead-msg">
+        <b>Leading message:</b> "Build Enterprise-ready AI Workflows, Apps &amp; Agents"
+        <p class="lead-sub">"All your teams, all their workflows — connected in one workspace."</p>
+      </div>
+      <div class="mini-grid">
+        <div class="mini-card"><b>Platform Positioning</b><p>"Humans and agents, on the same page"</p></div>
+        <div class="mini-card"><b>AI Agents</b><p>"Don't just ask AI. Deploy it."</p></div>
+        <div class="mini-card"><b>AI App Building (Omni)</b><p>"Production apps at prototype speed"</p></div>
+        <div class="mini-card"><b>Scale (HyperDB)</b><p>"Work from one trusted source at 100M-record scale"</p></div>
+        <div class="mini-card"><b>Enterprise &amp; Security</b><p>"The power of AI with the industrial-grade platform your business demands"</p></div>
+        <div class="mini-card"><b>Ecosystem</b><p>"Plan in Claude. Follow up in Slack. Publish to your CMS."</p></div>
+      </div>
+    </div>
+
+    <div class="callout teal">
+      <span class="callout-label">Audience</span>
+      <div class="mini-row">
+        <b>Industries</b>
+        <div class="tag-list">
+          <span class="tag">Media &amp; Entertainment</span>
+          <span class="tag">Technology / SaaS</span>
+          <span class="tag">Agency &amp; Professional Services</span>
+          <span class="tag">Retail</span>
+          <span class="tag">CPG / Manufacturing</span>
+          <span class="tag">Education</span>
+          <span class="tag">Finance</span>
+          <span class="tag">HR</span>
+        </div>
+      </div>
+      <div class="mini-row">
+        <b>Roles</b>
+        <div class="tag-list">
+          <span class="tag">Product Managers</span>
+          <span class="tag">Marketing Ops Leads</span>
+          <span class="tag">Creative Ops</span>
+          <span class="tag">Operations Directors</span>
+          <span class="tag">IT / Engineering</span>
+        </div>
+      </div>
+      <div class="mini-row">
+        <b>Segment (company size)</b>
+        <p>Mid-market to Enterprise — free tier exists, but features, messaging, and sales motion are enterprise-first.</p>
+      </div>
+    </div>
+
+    <div class="callout coral">
+      <span class="callout-label">Key core products</span>
+      <div class="mini-grid">
+        <div class="mini-card"><b>HyperDB</b><p>100M-record relational layer, single source of truth for apps/agents/workflows</p></div>
+        <div class="mini-card"><b>Interface Designer</b><p>No-code custom, role-based views</p></div>
+        <div class="mini-card"><b>Automations</b><p>Trigger-based workflow automation</p></div>
+        <div class="mini-card"><b>Views + Reporting</b><p>Grid/Gallery/Kanban/Calendar/Gantt + built-in dashboards</p></div>
+        <div class="mini-card"><b>Portals + App Library</b><p>External guest collaboration + governed app packaging</p></div>
+        <div class="mini-card"><b>Governance &amp; Security + Integrations</b><p>RBAC, EKM, SOC2/ISO/HIPAA; Slack, Salesforce, Jira, Zendesk, Drive, REST API</p></div>
+      </div>
+    </div>
+
+    <div class="callout amber">
+      <span class="callout-label">Key AI products</span>
+      <div class="mini-grid">
+        <div class="mini-card"><b>Omni</b><p>Conversational AI app builder, data analyst, web researcher</p></div>
+        <div class="mini-card"><b>AI Agents / Field Agents</b><p>Document analysis, web search, image generation, custom agents at scale</p></div>
+        <div class="mini-card"><b>Airtable Assistant</b><p>Built-in AI analyst for natural-language Q&amp;A on your data</p></div>
+        <div class="mini-card"><b>Superagent + AI Automations</b><p>Multi-agent orchestration (announced Jan 2026)</p></div>
+        <div class="mini-card"><b>Airtable for ChatGPT + Claude MCP Connector</b><p>External AI tool bridges</p></div>
+        <div class="mini-card"><b>AI Plays</b><p>Pre-built AI workflow templates</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: AIRTABLE PRICING -->
+  <section id="pricing" class="reveal">
+    <div class="sec-head">
+      <span class="sec-icon">💰</span>
+      <h2>Airtable Pricing</h2>
+    </div>
+    <p class="sec-sub">Pricing model and current tiers.</p>
+
+    <div class="callout teal">
+      <span class="callout-label">Pricing model</span>
+      <ul class="prod-list">
+        <li>Per-seat, billed per workspace (not per account)</li>
+        <li>Annual billing is the default published rate — monthly billing costs more</li>
+        <li>Two sales tracks: self-serve (Team/Business) and sales-led (Business/Enterprise Scale)</li>
+        <li>AI credits bundled into every plan, but don't roll over month to month</li>
+        <li>Enterprise Scale has no public price</li>
+      </ul>
+    </div>
+
+    <div class="callout coral">
+      <span class="callout-label">Pricing gotchas</span>
+      <ul class="prod-list">
+        <li>Record limits are per-base, not per-workspace (1K Free / 50K Team / 125K Business / 500K Enterprise)</li>
+        <li>Team bills Commenters and above; Business bills Editors and above only — surprise charges on Team when adding read-only users</li>
+        <li>AI credits don't roll over — unused credits expire monthly</li>
+        <li>A separate legacy Enterprise plan still exists with different features</li>
+        <li>Business is dual-track: self-serve ($45/seat) vs. sales-led (custom) — feature parity not disclosed</li>
+        <li>HyperDB (the flagship AI/scale product) is Enterprise-only — no self-serve path</li>
+        <li>Automation runs hard-cap, not throttle, once limits are hit</li>
+      </ul>
+    </div>
+
+    <div class="pane-title">Pricing Plans</div>
+    <p class="scroll-hint">Swipe to see more →</p>
+    <div class="table-scroll">
+      <table class="table-left">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th class="num">Price</th>
+            <th class="num">Records/base</th>
+            <th class="num">Automation runs/mo</th>
+            <th>Notable</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Free</td>
+            <td class="num">$0</td>
+            <td class="num">1,000</td>
+            <td class="num">100</td>
+            <td>5 editors max, 500 AI credits/editor/mo</td>
+          </tr>
+          <tr>
+            <td>Team</td>
+            <td class="num">$20/seat/mo (annual)</td>
+            <td class="num">50,000</td>
+            <td class="num">25,000</td>
+            <td>15,000 AI credits/user/mo, Portals add-on from $120/mo</td>
+          </tr>
+          <tr>
+            <td>Business</td>
+            <td class="num">$45/seat/mo (annual)</td>
+            <td class="num">125,000</td>
+            <td class="num">100,000</td>
+            <td>SSO, admin panel, 20,000 AI credits/user/mo, also sales-led</td>
+          </tr>
+          <tr>
+            <td>Enterprise Scale</td>
+            <td class="num">Contact Sales</td>
+            <td class="num">500,000</td>
+            <td class="num">500,000</td>
+            <td>HyperDB, Enterprise Hub, DLP, 25,000 AI credits/user/mo</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION 6: WHAT'S NEW -->
+  <section id="whats-new" class="reveal">
+    <div class="sec-head">
+      <span class="sec-icon">🆕</span>
+      <h2>What's New at Airtable</h2>
+    </div>
+    <p class="sec-sub">Product releases.</p>
+
+    <div class="news-group-label">Product news</div>
+    <div class="news-card">
+      <span class="news-date mono">Jul 2026</span>
+      <p class="news-headline">Ask Airtable questions directly from Slack</p>
+      <p class="news-blurb">Query Airtable data and get AI-powered answers without leaving Slack.</p>
+    </div>
+    <div class="news-card">
+      <span class="news-date mono">Jul 2026</span>
+      <p class="news-headline">Build and manage Automations with external agents (MCP)</p>
+      <p class="news-blurb">External AI agents (e.g. Claude, GPT) can now build and manage Airtable automations via MCP.</p>
+    </div>
+    <div class="news-card">
+      <span class="news-date mono">Jun 2026</span>
+      <p class="news-headline">Chat with Omni on iOS and Android</p>
+      <p class="news-blurb">Omni AI app builder now available on mobile.</p>
+    </div>
+    <div class="news-card">
+      <span class="news-date mono">Jun 2026</span>
+      <p class="news-headline">Turn comments into automated workflows</p>
+      <p class="news-blurb">Trigger automations directly from record comments via @mentions or structured comments.</p>
+    </div>
+    <div class="news-card">
+      <span class="news-date mono">Jun 2026</span>
+      <p class="news-headline">New way to edit record detail pages: Forms</p>
+      <p class="news-blurb">Record detail pages can now be edited using a form-style layout.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-row">
+      <span>Airtable vs. monday — Competitive Brief</span>
+      <span>Compiled: 2026-08-06</span>
+      <span>Source: the web + Gong + Snowflake BigBrain</span>
+      <span>Contact: ytalam@monday.com</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var targets = document.querySelectorAll('.reveal');
+  if (reduce || !('IntersectionObserver' in window)) {
+    targets.forEach(function(el){ el.classList.add('is-visible'); });
+    return;
+  }
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  targets.forEach(function(el){ observer.observe(el); });
+})();
+
+(function(){
+  function txt(n){ return n ? n.textContent.replace(/\s+/g,' ').trim() : ''; }
+  function all(sel, root){ return Array.from((root||document).querySelectorAll(sel)); }
+
+  function nodeToLines(node){
+    if(!node || node.nodeType !== 1) return [];
+    var cls = node.classList;
+    var tag = node.tagName;
+
+    if(tag === 'H1') return ['# ' + txt(node), ''];
+    if(cls.contains('sec-head')){
+      var icon = node.querySelector('.sec-icon');
+      var h2 = node.querySelector('h2');
+      return ['## ' + (icon ? txt(icon) + ' ' : '') + (h2 ? txt(h2) : ''), ''];
+    }
+    if(cls.contains('eyebrow')) return [];
+    if(cls.contains('standfirst')) return [txt(node), ''];
+    if(cls.contains('meta-row')) return all('span', node).map(function(s){ return '*' + txt(s) + '*'; }).concat(['']);
+    if(cls.contains('stat-grid')){
+      var stats = all('.stat-tile', node).map(function(t){
+        return '- **' + txt(t.querySelector('.stat-num')) + '** — ' + txt(t.querySelector('.stat-cap'));
+      });
+      stats.push('');
+      return stats;
+    }
+    if(cls.contains('sec-sub')) return ['_' + txt(node) + '_', ''];
+    if(tag === 'OL' && cls.contains('reasons')){
+      var out = [];
+      all('.reason', node).forEach(function(r, i){
+        var title = txt(r.querySelector('.reason-title span'));
+        var desc = txt(r.querySelector('.reason-desc'));
+        var calls = txt(r.querySelector('.call-badge'));
+        var quote = txt(r.querySelector('.quote-text'));
+        var attr = r.querySelector('.attribution');
+        var linkEl = attr.querySelector('a.gong-btn');
+        var link = linkEl ? linkEl.getAttribute('href') : '';
+        out.push((i + 1) + '. **' + title + '**' + (calls ? ' — ' + calls : ''));
+        if(desc) out.push('   _' + desc + '_');
+        out.push('   > ' + quote);
+        if(link) out.push('   [Gong call](' + link + ')');
+        out.push('');
+      });
+      return out;
+    }
+    if(cls.contains('callout-label')) return ['**' + txt(node) + '**', ''];
+    if(cls.contains('lead-msg')){
+      var subEl = node.querySelector('.lead-sub');
+      var subTxt = subEl ? txt(subEl) : '';
+      var clone2 = node.cloneNode(true);
+      var subInClone = clone2.querySelector('.lead-sub');
+      if(subInClone) subInClone.remove();
+      var out2 = [clone2.textContent.trim()];
+      if(subTxt) out2.push('_' + subTxt + '_');
+      out2.push('');
+      return out2;
+    }
+    if(cls.contains('mini-grid')){
+      var cards = all('.mini-card', node).map(function(card){
+        return '- **' + txt(card.querySelector('b')) + '** — ' + txt(card.querySelector('p'));
+      });
+      cards.push('');
+      return cards;
+    }
+    if(cls.contains('mini-row')){
+      var label = txt(node.querySelector('b'));
+      var tagList = node.querySelector('.tag-list');
+      var val;
+      if(tagList){ val = all('.tag', tagList).map(txt).join(', '); }
+      else { var p = node.querySelector('p'); val = p ? txt(p) : ''; }
+      return ['**' + label + ':** ' + val, ''];
+    }
+    if(tag === 'UL' && (cls.contains('prod-list') || cls.contains('kmsg-list'))){
+      var items = all('li', node).map(function(li){ return '- ' + txt(li); });
+      items.push('');
+      return items;
+    }
+    if(cls.contains('social-proof')) return ['_' + txt(node) + '_', ''];
+    if(cls.contains('rating-head')) return [];
+    if(cls.contains('ratings-list')){
+      var rout = [];
+      all('.rating-row', node).forEach(function(row){
+        var label = txt(row.querySelector('.rating-label'));
+        var names = ['Airtable', 'monday'];
+        var parts = all('.g2-ring-group', row).map(function(g, gi){
+          var score = txt(g.querySelector('.g2-ring-inner'));
+          var count = txt(g.querySelector('.g2-ring-count'));
+          var win = g.querySelector('.g2-ring').classList.contains('win');
+          return names[gi] + ' ' + score + ' (' + count + ' reviews)' + (win ? ' 🏆' : '');
+        });
+        rout.push('- **' + label + '** — ' + parts.join(' · '));
+      });
+      rout.push('');
+      return rout;
+    }
+    if(cls.contains('table-scroll')){
+      var table = node.querySelector('table');
+      var headers = all('th', table.querySelector('thead')).map(txt);
+      var tout = ['| ' + headers.join(' | ') + ' |', '|' + headers.map(function(){ return '---'; }).join('|') + '|'];
+      all('tbody tr', table).forEach(function(tr){
+        tout.push('| ' + all('td', tr).map(txt).join(' | ') + ' |');
+      });
+      tout.push('');
+      return tout;
+    }
+    if(cls.contains('news-group-label') || cls.contains('pane-title')) return ['**' + txt(node) + '**', ''];
+    if(cls.contains('news-card')){
+      var date = txt(node.querySelector('.news-date'));
+      var head = txt(node.querySelector('.news-headline'));
+      var blurb = txt(node.querySelector('.news-blurb'));
+      return ['- **[' + date + ']** ' + head + ' — ' + blurb];
+    }
+    if(cls.contains('footer-row')) return all('span', node).map(txt).concat(['']);
+    if(tag === 'P') return [txt(node), ''];
+
+    var out3 = [];
+    Array.from(node.children).forEach(function(child){
+      out3 = out3.concat(nodeToLines(child));
+    });
+    return out3;
+  }
+
+  function buildMarkdown(){
+    var out = [];
+    out = out.concat(nodeToLines(document.querySelector('.hero')));
+    all('.wrap > section').forEach(function(sec){
+      if(sec.classList.contains('hero')) return;
+      out = out.concat(nodeToLines(sec));
+    });
+    out = out.concat(nodeToLines(document.querySelector('footer')));
+    return out.join('\n');
+  }
+
+  function downloadMd(){
+    var blob = new Blob([buildMarkdown()], { type: 'text/markdown' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'Airtable-vs-monday.md';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  var navToggle = document.getElementById('navToggle');
+  var sectionNav = document.getElementById('sectionNav');
+  function closeNav(){
+    if(!sectionNav || !navToggle) return;
+    sectionNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.textContent = '☰';
+  }
+
+  ['btnMdDesktop', 'btnMdMobile'].forEach(function(id){
+    var btn = document.getElementById(id);
+    if(!btn) return;
+    btn.addEventListener('click', function(){
+      downloadMd();
+      closeNav();
+    });
+  });
+
+  if(navToggle && sectionNav){
+    navToggle.addEventListener('click', function(){
+      var isOpen = sectionNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      navToggle.textContent = isOpen ? '✕' : '☰';
+    });
+    sectionNav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', closeNav);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
